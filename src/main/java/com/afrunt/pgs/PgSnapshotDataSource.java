@@ -46,12 +46,12 @@ import static java.nio.file.attribute.PosixFilePermission.*;
  */
 public class PgSnapshotDataSource implements DataSource, AutoCloseable {
     private static final Logger LOGGER = LoggerFactory.getLogger(PgSnapshotDataSource.class);
+    private final List<Consumer<DataSource>> dataSourceMutations = new CopyOnWriteArrayList<>();
+    private final Map<EmbeddedPostgres, List<Connection>> connectionsToDatabase = new ConcurrentHashMap<>();
     private volatile DataSource dataSource;
     private volatile EmbeddedPostgres pg;
     private Path currentDataDirectory;
-    private final List<Consumer<DataSource>> dataSourceMutations = new CopyOnWriteArrayList<>();
-    private final Map<EmbeddedPostgres, List<Connection>> connectionsToDatabase = new ConcurrentHashMap<>();
-    private Integer port;
+    private final Integer port;
 
     public PgSnapshotDataSource() {
         this(null);
@@ -159,6 +159,11 @@ public class PgSnapshotDataSource implements DataSource, AutoCloseable {
     }
 
     @Override
+    public int getLoginTimeout() throws SQLException {
+        return dataSource.getLoginTimeout();
+    }
+
+    @Override
     public void setLoginTimeout(int seconds) throws SQLException {
         dataSourceMutations.add(ds -> {
             try {
@@ -168,11 +173,6 @@ public class PgSnapshotDataSource implements DataSource, AutoCloseable {
             }
         });
         dataSource.setLoginTimeout(seconds);
-    }
-
-    @Override
-    public int getLoginTimeout() throws SQLException {
-        return dataSource.getLoginTimeout();
     }
 
     @Override

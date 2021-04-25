@@ -25,7 +25,9 @@
     <version>0.1</version>
 
     <name>PG-Snapshot-DataSource</name>
-    <description>Open source library that allows creating snapshots of embedded postgres database state and restore from them</description>
+    <description>Open source library that allows creating snapshots of embedded postgres database state and restore from
+        them
+    </description>
     <url>https://github.com/afrunt/pg-snapshot-datasource</url>
 
     <licenses>
@@ -191,33 +193,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
-    <!--<profiles>
+    <profiles>
         <profile>
             <id>deploy</id>
             <build>
@@ -248,6 +227,6 @@
                 </plugins>
             </build>
         </profile>
-    </profiles>-->
+    </profiles>
 
 </project>
