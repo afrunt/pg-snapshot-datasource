@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/afrunt/h2-snapshots.svg?branch=main)](https://travis-ci.org/afrunt/h2-snapshots)
+[![Build Status](https://travis-ci.org/afrunt/pg-snapshot-datasource.svg?branch=main)](https://travis-ci.org/afrunt/pg-snapshot-datasource)
 ## Java library that helps you to create simple embedded postgres database and make the snapshots
 Add `pg-snapshot-datasource` to your project. For maven projects just add this dependency:
 ```xml
